@@ -5,7 +5,7 @@ all: run
 run: build
 	./app.build
 
-test: build
+test:
 	go test $(go list ./... | grep -v vendor) -cover
 
 build: dependencies

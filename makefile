@@ -1,26 +1,26 @@
-OUTPUT=./app.o
+BINARY=./app.o
 VENDOR_DEST=vendor/
 
 all: run
 
 .PHONY: run
-run: $(OUTPUT)
-	$(OUTPUT)
+run: $(BINARY)
+	$(BINARY)
 
 .PHONY: test
 test:
 	go test $(go list ./... | grep -v vendor) -cover
 
-$(OUTPUT): $(VENDOR_DEST)
-	go build -o $(OUTPUT)
+$(BINARY): $(VENDOR_DEST)
+	go build -o $(BINARY)
 
 $(VENDOR_DEST):
 	dep ensure
 
 .PHONY: clean
 clean:
-	rm $(OUTPUT)
+	rm -f $(BINARY)
 
 .PHONY: vendor_clean
 vendor_clean:
-	rm -r $(VENDOR_DEST)
+	rm -rf $(VENDOR_DEST)

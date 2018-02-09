@@ -1,11 +1,15 @@
-IMAGE_NAME=makefile_test
 APP_LOCATION=$(shell go list)
 BINARY=./app.o
 VENDOR_DEST=vendor
 GO_VERSION=1.9
 ALPINE_VERSION=3.7
+IMAGE_NAME=makefile_test
 
 all: run
+
+.PHONY: package
+package: $(BINARY)
+	docker build -t $(IMAGE_NAME) .
 
 .PHONY: run
 run: $(BINARY)

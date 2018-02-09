@@ -1,15 +1,18 @@
-OUTPUT=app.build
+OUTPUT=./app.o
+VENDOR_DEST=vendor/
 
 all: run
 
-run: build
-	./app.build
+.PHONY: run
+run: $(OUTPUT)
+	$(OUTPUT)
 
+.PHONY: test
 test:
 	go test $(go list ./... | grep -v vendor) -cover
 
-build: dependencies
+$(OUTPUT): $(VENDOR_DEST)
 	go build -o $(OUTPUT)
 
-dependencies:
+$(VENDOR_DEST):
 	dep ensure

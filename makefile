@@ -16,3 +16,11 @@ $(OUTPUT): $(VENDOR_DEST)
 
 $(VENDOR_DEST):
 	dep ensure
+
+.PHONY: clean
+clean:
+	rm $(OUTPUT)
+
+.PHONY: vendor_clean
+vendor_clean:
+	rm -r $(VENDOR_DEST)
